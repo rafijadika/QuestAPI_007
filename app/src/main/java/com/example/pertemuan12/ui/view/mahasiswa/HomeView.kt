@@ -36,10 +36,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pertemuan12.R
+import com.example.pertemuan12.model.Mahasiswa
 import com.example.pertemuan12.ui.costumwidget.CoustumeTopAppBar
 import com.example.pertemuan12.ui.navigation.DestinasiNavigasi
 import com.example.pertemuan12.ui.viewmodel.HomeUiState
 import com.example.pertemuan12.ui.viewmodel.HomeViewModel
+import com.example.pertemuan12.ui.viewmodel.PenyediaViewModel
 
 object DestinasiHome : DestinasiNavigasi {
     override val route = "home"
