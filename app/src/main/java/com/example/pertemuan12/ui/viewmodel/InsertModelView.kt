@@ -1,13 +1,10 @@
 package com.example.pertemuan12.ui.viewmodel
 
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 
 class InsertModelView(private val mhs: MahasiswaRepsitory): ViewModel() {
     var UiState by mutableStateOf(UiState())
-    private set
+        private set
 
     fun updateInsertMhsState(insertUiEvent.InsertUiEvent) {
         uiState = InsertUiState(insertUiEvent = insertUiEvent)
