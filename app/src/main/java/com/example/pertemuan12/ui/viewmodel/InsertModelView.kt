@@ -2,7 +2,7 @@ package com.example.pertemuan12.ui.viewmodel
 
 import androidx.compose.runtime.mutableStateOf
 
-class InsertModelView(private val mhs: MahasiswaRepsitory): ViewModel() {
+class InsertViewModel(private val mhs: MahasiswaRepsitory): ViewModel() {
     var UiState by mutableStateOf(UiState())
         private set
 
