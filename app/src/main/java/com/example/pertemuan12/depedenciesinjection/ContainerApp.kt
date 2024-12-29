@@ -22,7 +22,9 @@ class MahasiswaContainer: AppContainer {
         retrofit.create(MahasiswaService::class.java)}
 
     override val kontakRepository: mahasiswaRepository by lazy {
-        NetworkKontakRepository(mahasiswaService)
+        MahasiswaRepository(mahasiswaService)
     }
 }
+
+
 
