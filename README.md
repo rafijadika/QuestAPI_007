@@ -1,0 +1,6 @@
+daftar mahasiswa ![Screenshot_20241230_080554](https://github.com/user-attachments/assets/9a55a2dd-0f34-4ff5-af6e-27c5f48693df)
+insert mahasiswa ![Screenshot_20241230_081136](https://github.com/user-attachments/assets/e8e18bcb-58fc-441b-9523-af4beabed0e2)
+hasil insert ![Screenshot_20241230_081212](https://github.com/user-attachments/assets/44956cb3-3348-4ae8-956f-98950dda2958)
+edit mahasiswa ![Screenshot_20241230_081523](https://github.com/user-attachments/assets/37178658-7853-4ef8-97b2-7323698d2c5c)
+hasil edit ![Screenshot_20241230_082036](https://github.com/user-attachments/assets/59adab86-87ee-4640-b749-00b7b35717eb)
+hapus mahasiswa ![Screenshot_20241230_082056](https://github.com/user-attachments/assets/39c1a6b2-4288-46db-bf5c-b8b5c678e3d4)
