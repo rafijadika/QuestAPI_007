@@ -17,42 +17,46 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.pertemuan12.ui.costumwidget.CoustumeTopAppBar
-import com.example.pertemuan12.ui.navigation.DestinasiNavigasi
+import com.example.pertemuan12.ui.costumwidget.CostumeTopAppBar
 import com.example.pertemuan12.ui.viewmodel.InsertUiEvent
 import com.example.pertemuan12.ui.viewmodel.InsertUiState
 import com.example.pertemuan12.ui.viewmodel.InsertViewModel
 import com.example.pertemuan12.ui.viewmodel.PenyediaViewModel
+import com.example.praktikum_pertemuan12.ui.navigation.DestinasiNavigasi
 import kotlinx.coroutines.launch
 
-object DestinasiEntry : DestinasiNavigasi {
+object DestinasiEntry: DestinasiNavigasi {
     override val route = "item_entry"
     override val titleRes = "Entry Mhs"
 }
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EntryMhsScreen(
-    navigateBack: () -> Unit,
+    navigateBack:()->Unit,
     modifier: Modifier = Modifier,
     viewModel: InsertViewModel = viewModel(factory = PenyediaViewModel.Factory)
-) {
+){
     val coroutineScope = rememberCoroutineScope()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            CoustumeTopAppBar(
+            CostumeTopAppBar(
                 title = DestinasiEntry.titleRes,
                 canNavigateBack = true,
                 scrollBehavior = scrollBehavior,
                 navigateUp = navigateBack
             )
         }
-    ){ innerPadding ->
+    ) { innerPadding ->
         EntryBody(
             insertUiState = viewModel.uiState,
             onSiswaValueChange = viewModel::updateInsertMhsState,
@@ -70,22 +74,33 @@ fun EntryMhsScreen(
     }
 }
 
+
 @Composable
 fun EntryBody(
     insertUiState: InsertUiState,
     onSiswaValueChange: (InsertUiEvent) -> Unit,
     onSaveClick: () -> Unit,
     modifier: Modifier = Modifier
-){
+) {
     Column(
         verticalArrangement = Arrangement.spacedBy(18.dp),
         modifier = modifier.padding(12.dp)
-    ){
+    ) {
+        // Tambahkan teks "Masukan Detail Mahasiswa"
+        Text(
+            text = "Masukan Detail Mahasiswa",
+            fontSize = 28.sp, // Ukuran font lebih besar
+            fontWeight = FontWeight.Bold, // Membuat teks lebih tebal
+            color = Color.Black, // Warna teks hitam
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+
         FormInput(
             insertUiEvent = insertUiState.insertUiEvent,
             onValueChange = onSiswaValueChange,
             modifier = Modifier.fillMaxWidth()
         )
+
         Button(
             onClick = onSaveClick,
             shape = MaterialTheme.shapes.small,
@@ -96,75 +111,90 @@ fun EntryBody(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+
+
 @Composable
 fun FormInput(
     insertUiEvent: InsertUiEvent,
-    onValueChange: (InsertUiEvent) -> Unit,
-    modifier: Modifier = Modifier,
+    modifier: Modifier =Modifier,
+    onValueChange:(InsertUiEvent)->Unit = {},
     enabled: Boolean = true
 ){
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(12.dp)
-    ){
+    ) {
         OutlinedTextField(
             value = insertUiEvent.nama,
-            onValueChange = { onValueChange(insertUiEvent.copy(nama = it)) },
+            onValueChange = {onValueChange(insertUiEvent.copy(nama = it))},
             label = { Text("Nama") },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
             singleLine = true
         )
+
+
         OutlinedTextField(
             value = insertUiEvent.nim,
-            onValueChange = { onValueChange(insertUiEvent.copy(nim = it)) },
+            onValueChange = {onValueChange(insertUiEvent.copy(nim = it))},
             label = { Text("NIM") },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
             singleLine = true
         )
+
+
         OutlinedTextField(
             value = insertUiEvent.jenis_kelamin,
-            onValueChange = { onValueChange(insertUiEvent.copy(jenis_kelamin = it)) },
+            onValueChange = {onValueChange(insertUiEvent.copy(jenis_kelamin = it))},
             label = { Text("Jenis Kelamin") },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
             singleLine = true
         )
+
+
         OutlinedTextField(
             value = insertUiEvent.alamat,
-            onValueChange = { onValueChange(insertUiEvent.copy(alamat = it)) },
+            onValueChange = {onValueChange(insertUiEvent.copy(alamat = it))},
             label = { Text("Alamat") },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
             singleLine = true
         )
+
+
         OutlinedTextField(
             value = insertUiEvent.kelas,
-            onValueChange = { onValueChange(insertUiEvent.copy(kelas = it)) },
+            onValueChange = {onValueChange(insertUiEvent.copy(kelas = it))},
             label = { Text("Kelas") },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
             singleLine = true
         )
+
+
         OutlinedTextField(
             value = insertUiEvent.angkatan,
-            onValueChange = { onValueChange(insertUiEvent.copy(angkatan = it)) },
+            onValueChange = {onValueChange(insertUiEvent.copy(angkatan = it))},
             label = { Text("Angkatan") },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
             singleLine = true
         )
-        if(enabled) {
+        if (enabled){
             Text(
                 text = "Isi Semua Data!",
                 modifier = Modifier.padding(12.dp)
             )
         }
+
+
         Divider(
             thickness = 8.dp,
             modifier = Modifier.padding(12.dp)
         )
+
+
     }
 }

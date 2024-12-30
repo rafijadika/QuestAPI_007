@@ -2,53 +2,44 @@ package com.example.pertemuan12.repository
 
 import com.example.pertemuan12.model.Mahasiswa
 import com.example.pertemuan12.serviceAPI.MahasiswaService
-import okio.IOException
+
 
 interface MahasiswaRepository {
-    suspend fun insertMahasiswa(mahasiswa: Mahasiswa)
-
     suspend fun getMahasiswa(): List<Mahasiswa>
-
-
+    suspend fun insertMahasiswa(mahasiswa: Mahasiswa)
     suspend fun updateMahasiswa(nim: String, mahasiswa: Mahasiswa)
-
     suspend fun deleteMahasiswa(nim: String)
-
     suspend fun getMahasiswaByNim(nim: String): Mahasiswa
 }
 
-class NetworkKontakRepository(
-    private val kontakApiService: MahasiswaService
-) : MahasiswaRepository {
-
+class NetworkMahasiswaRepository(private val mahasiswaService: MahasiswaService)
+    : MahasiswaRepository
+{
     override suspend fun insertMahasiswa(mahasiswa: Mahasiswa) {
-        kontakApiService.insertMahasiswa(mahasiswa)
+        mahasiswaService.insertMahasiswa(mahasiswa)
     }
 
     override suspend fun updateMahasiswa(nim: String, mahasiswa: Mahasiswa) {
-        kontakApiService.updateMahasiswa(nim, mahasiswa)
-    }
-
-    override suspend fun getMahasiswa(): List<Mahasiswa> {
-        return kontakApiService.getAllMahasiswa()
+        mahasiswaService.updateMahasiswa(nim, mahasiswa)
     }
 
     override suspend fun deleteMahasiswa(nim: String) {
         try {
-            val reponse = kontakApiService.deleteMahasiswa(nim)
-            if (!reponse.isSuccessful) {
-                throw IOException("Failed to delete kontak. HTTP Status code: " +
-                        "${reponse.code()}")
-            } else {
-                reponse.message()
-                println(reponse.message())
+            val response = mahasiswaService.deleteMahasiswa(nim)
+            if (!response.isSuccessful) {
+                throw Exception("Failed to delete mahasiswa. HTTP Status Code: ${response.code()}")
+            }
+            else{
+                response.message()
+                println(response.message())
             }
         } catch (e: Exception) {
             throw e
         }
     }
 
+    override suspend fun getMahasiswa(): List<Mahasiswa> = mahasiswaService.getAllMahasiswa()
     override suspend fun getMahasiswaByNim(nim: String): Mahasiswa {
-        return kontakApiService.getMahasiswabyNim(nim)
+        return mahasiswaService.getMahasiswabyNim(nim)
     }
 }
